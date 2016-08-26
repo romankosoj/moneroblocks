@@ -23,6 +23,8 @@ Route::get('/stats', 'StatsController@index');
 
 Route::get('/richlist', 'PagesController@richlist');
 
+Route::get('/charts', 'ChartsController@index');
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
