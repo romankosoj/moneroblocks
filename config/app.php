@@ -203,5 +203,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
     ],
+  
+  'denomination' => 1000000000000,
+  'money' => '%.12f',
 
 ];
