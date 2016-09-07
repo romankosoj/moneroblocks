@@ -6,25 +6,12 @@
 		<meta name="keywords" content="monero, block, transaction, payment id, blockexplorer, richlist, hashrate, difficulty, explorer, blockchain, xmr">
 		<meta name="description" content="Monero blockchain explorer -  XMR blocks, transactions, payment ids, hashrate, emission. We show it all. ">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="google-site-verification" content="LrH8eGW-k9EFwLgRMLXW7AzzdkyBJ0JQBhdsG9P2Gxw" />
 		<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 	<!--	<link href='//fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic,700,700italic' rel='stylesheet' type='text/css'> -->
 		<link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ URL::asset('css/grayscale.css') }}">
 		<link rel="stylesheet" href="{{ URL::asset('css/font-awesome.min.css') }}">
 		<link rel="icon" type="image/png" href="{{ URL::asset('img/favico_monero.ico') }}">
-
-	<!-- Google Analytics -->
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-62733903-1', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<!-- End Google Analytics -->
 
 	</head>
 	<body>
