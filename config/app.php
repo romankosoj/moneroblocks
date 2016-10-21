@@ -155,6 +155,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 
@@ -205,6 +206,5 @@ return [
     ],
   
   'denomination' => 1000000000000,
-  'money' => '%.12f',
-
+  'money' => '%.12f'
 ];

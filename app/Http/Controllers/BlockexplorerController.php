@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-//use App\Database;
+use App\Libraries\StringHelpers;
 use DB;
 
 class BlockexplorerController extends Controller
@@ -17,13 +17,21 @@ class BlockexplorerController extends Controller
 
   }
 
-  public function index() 
+	public function listBlocks($height = 0) 
   {
     $block_limit = 125;
 
-    $block_list = DB::select('select height, size, hash, timestamp, tx_count from blocks order by height desc limit ?', [$block_limit]);
+		if ($height > 0) {
+			$block_list = DB::select('select height, size, hash, timestamp, tx_count from blocks where height <= ? order by height desc limit ?', [$height, $block_limit]);	
+		}else{
+			$block_list = DB::select('select height, size, hash, timestamp, tx_count from blocks order by height desc limit ?', [$block_limit]);	
+		}
 
-    return view('explorer.home', compact("block_list"));
+		$page_height = $block_list[0]->height;
+		$higher = ($height==0 ? -1 : $page_height+$block_limit);	//$hight=0 means we are on the main page, no need to see higher blocks
+		$lower = $page_height-$block_limit;		
+		
+    return view('explorer.home', compact("block_list", "higher", "lower"));
   }
 
   public function showBlock($block)
@@ -65,11 +73,53 @@ class BlockexplorerController extends Controller
     $inputs = DB::select('select * from vin where bl_height = ? and txid = ?', [$bl_height, $tx_id]);
 
 		foreach($inputs as &$input){
-			$offsets = (object)[]; //DB::select('select * from vin where bl_height = ? and txid = ? and vinid = ?', [$bl_height, $tx_id, $input->vinid]);
+			$offsets = (object)[]; 
+			$offsets = DB::select("Call get_offset_link(?, ?, ?);", [$bl_height, $tx_id, $input->vinid]);
 			$input->offsets = $offsets;
 		}				
     
     return view('explorer.transaction_details', compact('transaction', 'outputs', 'inputs', 'offsets'));
   }
+	
+	public function showTransactionsByPaymentId($payment_id){
 
+		$transactions = DB::select("SELECT * FROM vw_payment_id WHERE payment_id = '".$payment_id."';");
+
+		return view('explorer.list_transactions', compact('transactions','payment_id'));
+	}	
+	
+	public function search($query){
+		$result = false;
+		$found = false;
+		$view = view('static.not_found', compact('query'));;
+
+		//is it a Monero Address? Really?
+		if (StringHelpers::isValidAddress($query)) {
+			$view = view('static.address_not_found', compact('query'));
+			
+		} elseif (StringHelpers::isValidHeight($query)) {
+			$view = $this->showBlock($query);
+			
+		}elseif(StringHelpers::isValidHash($query)){
+			$result = DB::select("SELECT count(hash) row_count FROM transactions WHERE hash = '".$query."';");
+
+			if($result[0]->row_count > 0){
+				$view = $this->showTransaction($query);
+			}
+
+			$result = DB::select("SELECT count(hash) row_count FROM vw_payment_id WHERE payment_id = '".$query."';");
+
+			if($result[0]->row_count > 0){
+				$view = $this->showTransactionsByPaymentId($query);
+			}
+
+			$result = DB::select("SELECT height FROM blocks WHERE hash = '".$query."';");
+
+			if(count($result) > 0){
+				$view = $this->showBlock($result[0]->height);
+			}
+		}
+
+		return $view;
+	}	
 }

@@ -1,12 +1,28 @@
 @extends('master')
 
 @section('content')
+
+@include('explorer.network_stats')
+
     <div class="row">
       <div class="col-xs-12 col-lg-12">
         <h3 class="page-header"><i class="fa fa-chain fa-fw"></i> Latest blocks</h3>
-        <div class="col-xs-12" id="previous-blocks" >
-          <span class="pull-right"><a href="/browser/blocks/{{ $block_list[0]->height-1 }}"><small>Previous blocks >></small></a></span>
-        </div>
+				@if ($higher > 0)
+       	<span class="pull-left">
+      		<a href="{{ url('browser', $higher) }}">
+						<i class="fa fa-chevron-left fa-1x"></i>&nbsp;Higher
+					</a>
+       	</span>
+				@endif
+
+				@if ($lower > 0)
+       	<span class="pull-right">
+      		<a href="{{ url('browser', $lower) }}">
+						&nbsp;Lower<i class="fa fa-chevron-right fa-1x"></i>
+					</a>
+       	</span>
+				@endif
+				
       </div>
     </div>
     <!-- /.row -->
@@ -46,10 +62,3 @@
 </div>
 <!-- /.row -->
 @endsection
-
-
-
-
-
-
-

@@ -1,6 +1,9 @@
 @extends('master')
 
 @section('content')
+
+@include('explorer.network_stats')
+
 <div class="row">
   <div class="col-lg-12"  style="text-overflow: ellipsis; overflow-x:hidden;">
     <h3 class="page-header"><i class="fa fa-exchange fa-fw"></i> Transaction <small>  {{ $transaction[0]->hash }} </small></h3>
@@ -46,7 +49,7 @@
 <!-- /.row -->
 
 <div class="row">
-  @if($transaction[0]->input_count > 0)
+  @if(count($inputs) > 0)
   <div class="col-sm-12 col-lg-6">
     <div class="panel panel-success">
       <div class="panel-heading">
@@ -83,7 +86,7 @@
           
           @foreach($input->offsets as $offset)
           <div class="row show-grid small">
-            <a href="../tx/<?php //$offset->output_tx_hash ?>"></a>
+            <a href="{{ url('tx', $offset->output_tx_hash ) }}"></a>
             <div class="col-sm-1">&nbsp;</div>
             <div class="col-sm-2 small">{{ $offset->output_height }}</div>
             <div class="col-sm-9 small">{{ $offset->output_public_key }}</div>

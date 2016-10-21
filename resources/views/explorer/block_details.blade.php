@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('explorer.network_stats')
+
 <div class="row">
   <div class="col-lg-12"  style="text-overflow: ellipsis; overflow-x:hidden;">
     <h3 class="page-header">
@@ -52,7 +54,7 @@
       </li>
       <li class="list-group-item">
         <i class="fa fa-arrows-h fa-fw"></i> Total Generated Coins
-        <span class="pull-right text-muted small"><em>{{ $block[0]->coins_generated }}</em></span>
+        <span class="pull-right text-muted small"><em>@coin($block[0]->coins_generated)</em></span>
       </li>
       <li class="list-group-item">
         <i class="fa fa-exchange fa-fw"></i> Transactions
@@ -82,9 +84,9 @@
 
       <div class="panel-body">
         <div class="row show-grid top-row">
-          <a href="../tx/{{$coinbase[0]->hash}}"></a>
+          <a href="{{ url('tx', $coinbase[0]->hash) }}"></a>
           <div class="col-xs-2 col-sm-6 col-md-7 hash">{{ $coinbase[0]->hash }}</div>
-          <div class="col-xs-6 col-sm-3 col-md-4">{{ $coinbase[0]->amount }}</div>
+          <div class="col-xs-6 col-sm-3 col-md-4">@coin($coinbase[0]->amount)</div>
           <div class="col-xs-1 col-sm-1 col-md-1">{{ $coinbase[0]->tx_size }}</div>
         </div>
       </div>
@@ -116,9 +118,9 @@
 
         @forelse ($transactions as $transaction)
         <div class="row show-grid top-row">
-          <a href="{{ url('../tx', $transaction->hash ) }}"></a>
+          <a href="{{ url('tx', $transaction->hash ) }}"></a>
           <div class="col-xs-2 col-sm-6 col-md-7 hash">{{ $transaction->hash }}</div>
-          <div class="col-xs-6 col-sm-3 col-md-2">{{ $transaction->amount }}</div>
+          <div class="col-xs-6 col-sm-3 col-md-2">@coin($transaction->amount)</div>
           <div class="col-xs-3 col-sm-2 col-md-2">{{ $transaction->fee }}</div>
           <div class="col-xs-1 col-sm-1 col-md-1">{{ $transaction->tx_size }}</div>
         </div>

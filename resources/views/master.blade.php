@@ -21,9 +21,9 @@
 				<div class="container">
 					<div class="navbar-default">
 						<div class="navbar-header">
-							<a href="{{ url('/') }}" title="Monero blocks - blockchain explorer" class="navbar-brand">
+							<a href="/" title="Monero blocks - blockchain explorer" class="navbar-brand">
 								<div class="pull-left">
-									<img src="/public/img/monero-block-explorer.png" alt="Monero block explorer"/>
+									<img src="{{ URL::asset('img/monero-block-explorer.png') }}" alt="Monero block explorer"/>
 								</div>
 								<span class="light">blocks</span>
 							</a>
@@ -65,9 +65,9 @@
 			<div class="container text-center">
 				If you find this useful, please consider contributing.
 				<span class="hash single-line">Monero Address: 49Jt4tzbvZ5PyEMub6tNDGKP4zxogN9t1VACVWgTEcMwhtCGjxrDyt5XCDHG6XpA2U1uWsnsyKYdrL25Vp6y2pou2bdboCZ</span>
-				<span class="single-line"><a href='https://openalias.org/'>OpenAlias</a>: donate.moneroblocks.eu </span>
+				<span class="single-line"><a href='https://openalias.org/'>OpenAlias</a>: donate.moneroblocks.info </span>
 			</div>
 		</footer>
-		<script src="{{{ URL::asset('public/js/b2.js')}}}"></script>
+		<script src="{{ URL::asset('js/b2.js') }}"></script>
 	</body>
 </html>
