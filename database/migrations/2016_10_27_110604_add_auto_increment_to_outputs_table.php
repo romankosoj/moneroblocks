@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAmountIndexTable extends Migration
+class AddAutoIncrementToOutputsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,8 @@ class CreateAmountIndexTable extends Migration
      */
     public function up()
     {
-        Schema::create('amount_index', function (Blueprint $table) {
-          $table->engine = 'MYISAM';
-          $table->unsignedBigInteger('amount');
-          $table->unsignedBigInteger('index'); 
+        Schema::table('vout', function ($table) {
+            $table->bigIncrements('amount_index')->unsigned()->change();
         });
     }
 
@@ -26,6 +24,8 @@ class CreateAmountIndexTable extends Migration
      */
     public function down()
     {
-        Schema::drop('amount_index');
+        Schema::table('vout', function ($table) {
+            $table->unsignedBigInteger('amount_index')->change();
+        });
     }
 }

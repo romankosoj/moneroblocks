@@ -13,8 +13,15 @@ class CreateKeyOffsetsTable extends Migration
     public function up()
     {
         Schema::create('key_offsets', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+          $table->unsignedBigInteger('bl_height');
+          $table->unsignedBigInteger('txid');
+          $table->unsignedBigInteger('vinid');          
+          $table->unsignedBigInteger('offsetid');
+          $table->unsignedBigInteger('offset_value');
+          
+          $table->primary(['bl_height', 'txid', 'vinid', 'offsetid']);
+          $table->index('offset_value');
+          
         });
     }
 
