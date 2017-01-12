@@ -66,7 +66,9 @@ class StatsController extends Controller
 		$medians["median800"] = $this->calculateMedian($arr800);
 		$medians["median1000"] = $this->calculateMedian($rs);
     
-    return view('stats.main_stats', compact('ring_size', 'txs', 'medians'));
+		$growth = DB::select("SELECT * FROM vw_blockchain_size_by_month order by month;");
+		
+    return view('stats.main_stats', compact('ring_size', 'txs', 'medians', 'growth'));
   }
   
   public static function showTransactionStats($period = "m", $records = 12){
