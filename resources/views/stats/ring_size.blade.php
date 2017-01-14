@@ -1,3 +1,4 @@
+<a name="ring-size"></a>
 <div id="wide-header" class="row">
   <div class="col-xs-12 col-lg-12 text-left">
     <h5><span class="page-header large"><i class="fa fa-users fa-fw"></i> mixins used in transactions (%) </span></h5>

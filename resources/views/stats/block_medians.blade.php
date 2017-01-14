@@ -1,3 +1,4 @@
+<a name="block-medians"></a>
 <div id="wide-header" class="row">
   <div class="col-xs-12 col-lg-12 text-left">
     <h5><span class="page-header large"><i class="fa fa-bullseye fa-fw"></i> median block size of the last n blocks </span></h5>

@@ -1,3 +1,4 @@
+<a name="transaction-stats"></a>
 <div id="wide-header" class="row">
   <div class="col-xs-12 col-lg-12 text-left">
     <h5><span class="page-header large"><i class="fa fa-exchange fa-fw"></i> transactions per block (excluding coinbase)</span></h5>

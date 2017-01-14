@@ -22,12 +22,13 @@ class StatsController extends Controller
   {
     
     $ring_size = [];
-    $txs = [];    
+    $txs = []; 
+		$ringct = [];
     
     $number_of_days = 1; //last day
     $m = DB::select("Call get_mixin_stats(?);", [$number_of_days]);
     $tx = DB::select("Call get_tx_per_block(?);", [$number_of_days]);
-    array_push($ring_size, $m[0]);
+		array_push($ring_size, $m[0]);
     array_push($txs, $tx[0]);
     
     $number_of_days = 7; //last week
@@ -68,7 +69,16 @@ class StatsController extends Controller
     
 		$growth = DB::select("SELECT * FROM vw_blockchain_size_by_month order by month;");
 		
-    return view('stats.main_stats', compact('ring_size', 'txs', 'medians', 'growth'));
+		$ct = DB::select("SELECT data, hora, txv1, txv2, txv2/total as ratio FROM vwRingCTTxCountByHour order by data desc, hora desc limit 24;");
+		array_push($ringct, $ct);
+
+		$ct = DB::select("SELECT data, txv1, txv2, txv2/total as ratio FROM vwRingCTTxCountByDay order by data desc limit 24;");
+		array_push($ringct, $ct);		
+/*		
+		$ct = DB::select("SELECT *, v2/total as ratio FROM vwRingCTTxCountByMonth order by data limit 12;");
+		array_push($ringct, $ct);
+*/		
+    return view('stats.main_stats', compact('ring_size', 'txs', 'medians', 'growth', 'ringct'));
   }
   
   public static function showTransactionStats($period = "m", $records = 12){
