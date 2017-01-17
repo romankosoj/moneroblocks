@@ -1,7 +1,7 @@
 <a name="ring-ct transactions"></a>
 <div class="row">
   <div class="col-xs-12 col-lg-12 text-left">
-    <h5><span class="page-header large"><i class="fa fa-envelope-o"></i>&nbsp;rincCT transactions (excluding coinbase)</span></h5>
+    <h5><span class="page-header large"><i class="fa fa-envelope"></i>&nbsp;rincCT transactions (excluding coinbase)</span></h5>
   </div>
   <!-- /.col-lg-22 --> 
 </div> <!-- /.row -->

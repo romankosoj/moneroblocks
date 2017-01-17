@@ -17,7 +17,7 @@
 <br>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-12 col-lg-6">
     <ul class="list-group">
       <li class="list-group-item">
         <i class="fa fa-money fa-fw"></i> From Block
@@ -25,7 +25,11 @@
       </li>
         <li class="list-group-item">
         <i class="fa fa-money fa-fw"></i> Output total
-        <span class="pull-right text-muted small"><em>@coin($transaction[0]->amount) XMR</em></span>
+          @if ($transaction[0]->version == 2 && $transaction[0]->coinbase_tx == 0)
+          <span class="pull-right text-muted small"><em>confidential</em></span>
+          @else
+          <span class="pull-right text-muted small"><em>@coin($transaction[0]->amount) XMR</em></span>
+					@endif            
       </li>
       <li class="list-group-item">
         <i class="fa fa-bank fa-fw"></i> Fee
@@ -43,6 +47,11 @@
         <i class="fa fa-unlock fa-fw"></i> Unlock 
         <span class="pull-right text-muted small"><em>{{ $transaction[0]->unlock_time }}</em></span>
       </li>
+      @if ($transaction[0]->version == 2 && $transaction[0]->coinbase_tx == 0)
+      <li class="list-group-item highlight">
+        <i class="fa fa-envelope fa-2x"></i>&nbsp;Confidential Transaction &mdash; amounts are not disclosed.
+      </li>
+      @endif
     </ul>
   </div>
 </div>

@@ -38,7 +38,11 @@
         <div class="row show-grid top-row">
           <a href="{{ url('tx', $transaction->hash ) }}"></a>
           <div class="col-xs-2 col-sm-6 col-md-7 hash">{{ $transaction->hash }}</div>
+          @if ($transaction->version == 2)
+          <div class="col-xs-6 col-sm-3 col-md-2"><i class="fa fa-envelope-o"></i>&nbsp;confidential</div>
+          @else
           <div class="col-xs-6 col-sm-3 col-md-2">@coin($transaction->amount)</div>
+					@endif
           <div class="col-xs-3 col-sm-2 col-md-2">@coin($transaction->fee)</div>
           <div class="col-xs-1 col-sm-1 col-md-1">{{ $transaction->tx_size }}</div>
         </div>
