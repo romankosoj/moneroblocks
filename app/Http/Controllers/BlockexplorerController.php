@@ -43,7 +43,12 @@ class BlockexplorerController extends Controller
     $block_height = $block;
         
     $block = DB::select('select * from blocks where height = ?', [$block_height]);
-    
+
+		if(count($block) == 0){
+			$message = "The Monero chain has not reached height ".$block_height." yet. Be patient, miners are doing their best!"; 
+			return view('static.not_found', compact('message'));
+		}
+	
     //ordering by coinbase desc, ensures the coinbase tx comes first.
     $transactions = DB::select('select * from transactions where bl_height = ? order by coinbase_tx desc, txid', [$block_height]);
     
@@ -74,7 +79,7 @@ class BlockexplorerController extends Controller
 
 		foreach($inputs as &$input){
 			$offsets = (object)[]; 
-			$offsets = DB::select("Call get_offset_link(?, ?, ?);", [$bl_height, $tx_id, $input->vinid]);
+			$offsets = DB::select("Call get_offset_link_aux(?, ?, ?);", [$bl_height, $tx_id, $input->vinid]);
 			$input->offsets = $offsets;
 		}				
     
@@ -91,7 +96,7 @@ class BlockexplorerController extends Controller
 	public function search($query){
 		$result = false;
 		$found = false;
-		$view = view('static.not_found', compact('query'));;
+		$view = view('static.not_found', compact('query'));
 
 		//is it a Monero Address? Really?
 		if (StringHelpers::isValidAddress($query)) {
