@@ -79,7 +79,7 @@ class BlockexplorerController extends Controller
 
 		foreach($inputs as &$input){
 			$offsets = (object)[]; 
-			$offsets = DB::select("Call get_offset_link_aux(?, ?, ?);", [$bl_height, $tx_id, $input->vinid]);
+			$offsets = DB::select("Call get_offset_link(?, ?, ?);", [$bl_height, $tx_id, $input->vinid]);
 			$input->offsets = $offsets;
 		}				
     
