@@ -22,8 +22,13 @@ Route::get('/block/{block}', 'BlockexplorerController@showBlock');
 Route::get('/tx/{transaction}', 'BlockexplorerController@showTransaction');
 
 Route::get('/stats', 'StatsController@index');
-
+Route::get('/stats/blockchain-growth', 'StatsController@showBlockchainGrowth');
+Route::get('/stats/transaction-stats', 'StatsController@showTransactionsStats');
 Route::get('/stats/transactions/{period}/{records}', 'StatsController@showTransactionStats');
+Route::get('/stats/block-medians', 'StatsController@showBlockMedians');
+Route::get('/stats/ring-size', 'StatsController@showRingSize');
+Route::get('/stats/ringct-transactions', 'StatsController@showRingCTTransactions');
+
 
 Route::get('/richlist', 'StaticPagesController@richlist');
 

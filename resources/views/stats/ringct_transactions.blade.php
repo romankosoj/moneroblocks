@@ -1,3 +1,9 @@
+@extends('master')
+
+@section('content')
+
+@include('stats.stats_nav')
+
 <a name="ring-ct transactions"></a>
 <div class="row">
   <div class="col-xs-12 col-lg-12 text-left">
@@ -25,10 +31,10 @@
         ?>
         <div class="row show-grid link">
           <div class="col-xs-1 col-sm-3 col-md-1">&nbsp;</div>
-          <div class="col-xs-3 col-sm-2 col-md-3">{{$record['data']}}&nbsp;{{ $record['hora'] }}:00</div>
-          <div class="col-xs-3 col-sm-2 col-md-2">{{$record['txv1']}}</div>
-          <div class="col-xs-3 col-sm-2 col-md-2">{{$record['txv2']}}</div>
-          <div class="col-xs-3 col-sm-2 col-md-2">{{$record['ratio']*100}}%</div>
+          <div class="col-xs-3 col-sm-2 col-md-3">{{$record->data}}&nbsp;{{ $record->hora }}:00</div>
+          <div class="col-xs-3 col-sm-2 col-md-2">{{$record->txv1}}</div>
+          <div class="col-xs-3 col-sm-2 col-md-2">{{$record->txv2}}</div>
+          <div class="col-xs-3 col-sm-2 col-md-2">{{$record->ratio*100}}%</div>
           <div class="col-xs-2 col-sm-3 col-md-2">&nbsp;</div>
         </div>
         <?php } ?>
@@ -57,10 +63,10 @@
         ?>
         <div class="row show-grid link">
           <div class="col-xs-1 col-sm-3 col-md-1">&nbsp;</div>
-          <div class="col-xs-3 col-sm-2 col-md-3">{{$record['data']}}</div>
-          <div class="col-xs-3 col-sm-2 col-md-2">{{$record['txv1']}}</div>
-          <div class="col-xs-3 col-sm-2 col-md-2">{{$record['txv2']}}</div>
-          <div class="col-xs-3 col-sm-2 col-md-2">{{$record['ratio']*100}}%</div>
+          <div class="col-xs-3 col-sm-2 col-md-3">{{$record->data}}</div>
+          <div class="col-xs-3 col-sm-2 col-md-2">{{$record->txv1}}</div>
+          <div class="col-xs-3 col-sm-2 col-md-2">{{$record->txv2}}</div>
+          <div class="col-xs-3 col-sm-2 col-md-2">{{$record->ratio*100}}%</div>
           <div class="col-xs-2 col-sm-3 col-md-2">&nbsp;</div>
         </div>
         <?php } ?>
@@ -72,3 +78,5 @@
   <!-- /.col-lg-4 -->
 </div>
 <!-- /.row -->
+
+@endsection

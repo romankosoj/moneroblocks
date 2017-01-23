@@ -1,3 +1,9 @@
+@extends('master')
+
+@section('content')
+
+@include('stats.stats_nav')
+
 <a name="block-medians"></a>
 <div id="wide-header" class="row">
   <div class="col-xs-12 col-lg-12 text-left">
@@ -34,3 +40,4 @@
   <!-- /.panel -->
 </div>
 <!-- /.row -->
+@endsection

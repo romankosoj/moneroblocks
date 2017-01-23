@@ -467,3 +467,43 @@ text-align:right;
   background-color: #f5f5f5;
   cursor: default;
 }
+
+.subnav {
+	width: 100%;
+	float: none;
+	margin: 0 0 0 0;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: right;
+	position: relative;
+	/*max-width: 420px;*/
+	margin-top: 0.5em;
+	/*outline: solid 1px green;*/
+	margin: 0;
+	bottom: 0;
+	right: 1rem;
+	float: right;
+	/*width: 30%;*/
+	
+}
+
+.subnav li {
+	display: inline-block;
+	padding-top: 0.3em;
+	padding-left: 1em;
+	padding-right: 1em;	
+	background:whitesmoke;
+	outline: solid 1px white;
+}	
+	
+.subnav li:hover {	
+	background:#b7b7b7;
+}
+
+.subnav li a:hover {	
+	background:#b7b7b7;
+}
+
+.subnav > li {
+	float: left;
+}

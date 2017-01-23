@@ -1,3 +1,9 @@
+@extends('master')
+
+@section('content')
+
+@include('stats.stats_nav')
+
 <a name="ring-size"></a>
 <div id="wide-header" class="row">
   <div class="col-xs-12 col-lg-12 text-left">
@@ -80,3 +86,4 @@
 
 </div>
 <!-- /.row -->
+@endsection
