@@ -1,6 +1,9 @@
 @extends('master')
 
 @section('content')
+
+@include('stats.stats_nav')
+
 <div id="wide-header" class="row">
   <div class="col-xs-12 col-lg-12 text-center">
     <h5><span class="page-header large"> average transaction count per block </span></h5>

@@ -106,10 +106,10 @@
     <div class="panel panel-default panel-table">
       <div class="panel-heading">
         <div class="row">
-          <div class="col-xs-2 col-sm-6 col-md-7 hash-header">Hash</div>
-          <div class="col-xs-6 col-sm-3 col-md-2">Output total</div>
-          <div class="col-xs-3 col-sm-2 col-md-2">Fee</div>
-          <div class="col-xs-1 col-sm-1 col-md-1">Bytes</div>
+          <div class="col-xs-2 col-sm-5 col-md-7 hash-header">Hash</div>
+          <div class="col-xs-5 col-sm-3 col-md-2">Output total</div>
+          <div class="col-xs-5 col-sm-3 col-md-2">Fee</div>
+          <div class="col-xs-2 col-sm-1 col-md-1">Bytes</div>
         </div>
       </div>
       <!-- /.panel-heading -->
@@ -119,13 +119,13 @@
         @forelse ($transactions as $transaction)
         <div class="row show-grid top-row">
           <a href="{{ url('tx', $transaction->hash ) }}"></a>
-          <div class="col-xs-2 col-sm-6 col-md-7 hash">{{ $transaction->hash }}</div>
+          <div class="col-xs-2 col-sm-5 col-md-7 hash">{{ $transaction->hash }}</div>
           @if ($transaction->version == 2)
-          <div class="col-xs-6 col-sm-3 col-md-2"><i class="fa fa-envelope-o"></i>&nbsp;confidential</div>
+          <div class="col-xs-5 col-sm-3 col-md-2"><i class="fa fa-envelope-o"></i>&nbsp;confidential</div>
           @else
-          <div class="col-xs-6 col-sm-3 col-md-2">@coin($transaction->amount)</div>
+          <div class="col-xs-5 col-sm-3 col-md-2">@coin($transaction->amount)</div>
           @endif
-          <div class="col-xs-3 col-sm-2 col-md-2">@coin($transaction->fee)</div>
+          <div class="col-xs-5 col-sm-3 col-md-2">@coin($transaction->fee)</div>
           <div class="col-xs-1 col-sm-1 col-md-1">{{ $transaction->tx_size }}</div>
         </div>
         @empty

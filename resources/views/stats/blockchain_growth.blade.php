@@ -5,7 +5,7 @@
 @include('stats.stats_nav')
 
 <a name="blockchain-growth"></a>
-<div class="row">
+<div id="wide-header" class="row">
   <div class="col-xs-12 col-lg-12 text-left">
     <h5><span class="page-header large"><i class="fa fa-line-chart fa-fw"></i>monthly blockchain growth</span></h5>
   </div>
