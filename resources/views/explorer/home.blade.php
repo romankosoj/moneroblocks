@@ -4,7 +4,9 @@
 
 @include('explorer.network_stats')
 
-    <div class="row">
+@include('explorer.transaction_pool')
+
+	<div class="row">
       <div class="col-xs-12 col-lg-12">
         <h3 class="page-header"><i class="fa fa-chain fa-fw"></i> Latest blocks</h3>
 				@if ($higher > 0)
@@ -61,4 +63,5 @@
     <!-- /.col-lg-4 -->
 </div>
 <!-- /.row -->
+
 @endsection

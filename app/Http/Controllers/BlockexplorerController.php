@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libraries\StringHelpers;
+use App\Libraries\MoneroDaemonRPC;
 use DB;
 
 class BlockexplorerController extends Controller
@@ -19,7 +20,8 @@ class BlockexplorerController extends Controller
 
 	public function listBlocks($height = 0) 
   {
-    $block_limit = 125;
+		$rpc = new MoneroDaemonRPC();
+    $block_limit = 50;
 
 		if ($height > 0) {
 			$block_list = DB::select('select height, size, hash, timestamp, tx_count from blocks where height <= ? order by height desc limit ?', [$height, $block_limit]);	
@@ -31,7 +33,10 @@ class BlockexplorerController extends Controller
 		$higher = ($height==0 ? -1 : $page_height+$block_limit);	//$hight=0 means we are on the main page, no need to see higher blocks
 		$lower = $page_height-$block_limit;		
 		
-    return view('explorer.home', compact("block_list", "higher", "lower"));
+		$transaction_pool = json_decode($rpc->getTransactionPool(), false);
+		$transaction_pool = $transaction_pool->transactions;
+		
+    return view('explorer.home', compact("block_list", "higher", "lower", "transaction_pool"));
   }
 
   public function showBlock($block)

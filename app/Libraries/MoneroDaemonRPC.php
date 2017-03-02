@@ -108,6 +108,16 @@ class MoneroDaemonRPC {
 
 		return $result;
 	}
+	
+	public function getTransactionPool($param = '') {
+		$data = array('txs_hashes' => [$param]);
+		$data_string = json_encode($data);
+		
+		$path = '/get_transaction_pool';
+		$result = $this->rpc_call($data_string, $path);
+
+		return $result;
+	}
 
 	public function getLastBlockHeader(){
 		$data = array('id' => '0', 'jsonrpc' => '0', 'method' => 'getlastblockheader', 'params' => json_decode("{}"));     
