@@ -31,12 +31,16 @@ class BlockexplorerController extends Controller
 
 		$page_height = $block_list[0]->height;
 		$higher = ($height==0 ? -1 : $page_height+$block_limit);	//$hight=0 means we are on the main page, no need to see higher blocks
-		$lower = $page_height-$block_limit;		
-		
+		$lower = $page_height-$block_limit;
+
 		$transaction_pool = json_decode($rpc->getTransactionPool(), false);
-		$transaction_pool = $transaction_pool->transactions;
-		
-    return view('explorer.home', compact("block_list", "higher", "lower", "transaction_pool"));
+		if(isset($transaction_pool->transactions)){
+			$transaction_pool = $transaction_pool->transactions;
+		}else{
+			$transaction_pool = [];
+		}
+
+	return view('explorer.home', compact("block_list", "higher", "lower", "transaction_pool"));
   }
 
   public function showBlock($block)
