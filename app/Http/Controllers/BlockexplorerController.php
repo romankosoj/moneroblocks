@@ -33,7 +33,7 @@ class BlockexplorerController extends Controller
 		$higher = ($height==0 ? -1 : $page_height+$block_limit);	//$hight=0 means we are on the main page, no need to see higher blocks
 		$lower = $page_height-$block_limit;
 
-		$transaction_pool = json_decode($rpc->getTransactionPool(), false);
+//		$transaction_pool = json_decode($rpc->getTransactionPool(), false);
 		if(isset($transaction_pool->transactions)){
 			$transaction_pool = $transaction_pool->transactions;
 		}else{
@@ -43,21 +43,30 @@ class BlockexplorerController extends Controller
 	return view('explorer.home', compact("block_list", "higher", "lower", "transaction_pool"));
   }
 
-  public function showBlock($block)
+  public function showBlock($query)
   {
-    //TODO:
-    //escape $block
-    //check wether it is a block height or block hash
-    //if hash check if valid
-    $block_height = $block;
-        
-    $block = DB::select('select * from blocks where height = ?', [$block_height]);
+		if (StringHelpers::isValidHeight($query)) {
+			$block_height = $query;
+			
+			$block = DB::select('select * from blocks where height = ?', [$block_height]);
 
-		if(count($block) == 0){
-			$message = "The Monero chain has not reached height ".$block_height." yet. Be patient, miners are doing their best!"; 
-			return view('static.not_found', compact('message'));
-		}
-	
+			if(count($block) == 0){
+				$message = "The Monero chain has not reached height ".$block_height." yet. Be patient, miners are doing their best!"; 
+				return view('static.not_found', compact('message'));
+			}			
+			
+		}elseif(StringHelpers::isValidHash($query)){
+			$block = DB::select('select * from blocks where hash = ?', [$query]);
+			
+			if(count($block) == 0){
+				$message = "Hmmm. That's strange. I don't think i have seen that block hash around here. Are you sure you meant ".$query."?"; 
+				return view('static.not_found', compact('message'));
+			}
+			
+			$block_height = $block[0]->height;
+			//var_dump($block);
+		}	
+		        
     //ordering by coinbase desc, ensures the coinbase tx comes first.
     $transactions = DB::select('select * from transactions where bl_height = ? order by coinbase_tx desc, txid', [$block_height]);
     
